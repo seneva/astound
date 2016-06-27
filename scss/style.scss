@@ -1,0 +1,699 @@
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/normalize";
+@import "font";
+
+@include google-font("Open+Sans", "300,700");
+@include google-font("Oswald", "700");
+@include font-face("socials", "../fonts/socials");
+
+* {
+  @include box-sizing(border-box);
+}
+
+*:before,
+*:after {
+  @include box-sizing(border-box);
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
+
+body {
+	font-family: $body-font;
+	color: $body-color;
+}
+
+.font-weight {
+	font-weight: bold;
+}
+
+.crossed {
+	text-decoration: line-through;
+}
+
+.sale {
+	display: none;
+
+	@include phone-screens {
+		display: block;
+		background: url(../images/sale.jpg) no-repeat 0 0;
+		background-size: cover;
+		width: 100%;
+		height: 175px;
+		text-transform: uppercase;
+		font: 60px/40px Tahoma , Arial, sans-serif;
+		text-align: center;
+		color: #fff;
+		padding-top: 60px;
+		letter-spacing: 11px;
+		margin-bottom: 30px;
+	}
+}
+
+.shell {
+	width: 100%;
+	overflow: hidden;
+	margin: 0 auto;
+
+	@include desktop-screens {
+		max-width:  $content-width;
+		padding: $shell-padding-top $shell-padding-left;
+	}
+
+	@include tablet-screens {
+		max-width:  $content-width;
+		padding: $shell-padding-top - 20px $shell-padding-left - 20px;
+	}
+}
+
+.products-list {
+	margin: 0 auto;
+	overflow: hidden;
+
+	@include desktop-screens {
+		width:  $product-list-desktop-width;
+	}
+
+	@include tablet-screens {
+		width:  $product-list-tablet-width;
+	}
+
+	@include phone-screens {
+		width:  280px;
+	}
+}
+
+.product {
+	float: left;
+	text-align: center;
+	position: relative;
+	
+	&:hover {
+		cursor: pointer;
+	}
+	
+	div {
+		position: relative;
+
+		&:hover .show-more {
+			opacity: 1;
+		}
+
+		.show-more {
+			-webkit-transition: opacity 500ms ease-in-out;
+	    	transition: opacity 500ms ease-in-out;
+			text-transform: uppercase;
+			background: $label-bkg-color;
+			color: $label-color;
+			font-size: 18px;
+			line-height: 32px;
+			position: absolute;
+			font-weight: $text-bold;
+
+			@include desktop-screens {
+				padding: 5px 7px;
+				top: 50%;
+				left: 50%;
+				opacity: 0;
+				@include translate(-50%, -50%);
+				span {
+					display: none;
+				}
+			}
+
+			@include phone-tablet-screens {
+				padding: 10px 7px;
+				background: rgba(0, 0, 0, 0.5);
+				opacity: 1;
+				color: #8ae6cf;
+				font-size: 20px;
+				width: 100%;
+				bottom: 4px;
+				left: 0;
+			}
+		}
+
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	.price {
+		padding: 3px 5px;
+		font-size: 16px;
+		line-height: 20px;
+		color: $label-color;
+		font-weight: $text-bold;
+		
+		span:first-child {
+			@extend .crossed;
+			margin-right: 10px;
+		}
+
+		span.discounted-price {
+			color: #ce2c52;
+		}
+
+	}
+
+	.title {
+		font-family: $title-font;
+		text-transform: uppercase;
+		font-size: $title-font-size;
+		line-height: 16px
+	}
+
+	@include desktop-screens {
+		margin: 0 10px;
+		max-width: 265px;
+
+		&:nth-child(3n) {
+			margin-right: 0
+		}
+
+		&:nth-child(3n+1) {
+			margin-left: 0
+		}
+
+		.price {
+			background: $label-bkg-color;
+			position: absolute;
+			right: 0;
+			top: 200px;
+		}
+	}
+
+	@include phone-tablet-screens {
+		margin: 0 20px;
+
+		&:nth-child(odd) {
+			clear: both;	
+		}
+
+		.title {
+			text-transform: uppercase;
+			font-size: 20px;
+			margin: 5px 0;
+		}
+
+		.price {
+			font-size: 22px;
+			margin-bottom: 20px;
+			display: block;
+
+			span.discounted-price {
+				color: $label-color;
+			}
+
+			span:first-child {
+				display: none;
+			}
+		}
+	}
+
+	@include phone-screens {
+		margin: 0;
+	}
+
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 835px;
+    padding: 20px;
+    color: #6c391c;
+    font-size: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+
+	img {
+		float: left;
+	}
+
+	@include tablet-screens {
+		width: 640px;
+	}
+
+	@include phone-screens {
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #2c87ce;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: center;
+    cursor: pointer;
+	@include border-radius(50%);
+
+	-ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+
+	&:before,
+	&:after {
+		display: block;
+		content: '';
+		position: absolute;
+		background: #2c87ce;
+	}
+
+	&:before {
+		width: 4px;
+		height: 20px;
+	    top: 8px;
+	    left: 16px;
+	}
+
+	&:after {
+		height: 4px;
+		width: 20px;
+		top: 16px;
+    	left: 8px;
+	}
+
+}
+
+.primary-button {
+	background: $action-bkg-color;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	color: $label-color;
+	padding: 15px 10px;
+	font-size: 14px;
+	width: 215px;
+	max-width: 100%;
+	display: inline-block;
+	text-align: center;
+	font-weight: $text-bold;
+	-webkit-transition: all 500ms ease-in-out;
+	transition: all 500ms ease-in-out;
+	@include border-radius(30px);
+
+	&:hover {
+		background: darken($action-bkg-color,20%);
+	}
+}
+
+.product-info {
+	padding: 0 40px 0 30px;
+	overflow: hidden;
+
+	.item-number {
+		color: #828389;
+		font-size: 10px;
+	}
+
+	.price {
+		font-size: 24px;
+		color: $label-color;
+		font-weight: $text-bold;
+
+		span:first-child {
+			@extend .crossed;
+			margin-right: 10px;
+		}
+
+		span:last-child {
+			color: #ce2c52;
+		}
+	}
+
+	.sizes {
+		color: $label-color;
+		font-size: 14px;
+		line-height: 36px;
+		margin: 10px 0 20px;
+		font-weight: $text-bold;
+		text-transform: uppercase;
+
+		span {
+			&:hover {
+				background: #2c303d;
+				color: #fff;
+			}
+			-webkit-transition: all 500ms ease-in-out;
+			transition: all 500ms ease-in-out;
+			cursor: pointer;
+			width: 38px;
+			height: 38px;
+			display: inline-block;
+			text-align: center;
+			text-transform: uppercase;
+			border: 1px solid #000000;
+			margin: 0 5px;
+			@include border-radius(20px);	
+		}
+
+		span:first-child {
+			margin-left: 20px;
+		}
+	}
+}
+
+.stars {
+	@extend .clearfix;
+	margin: 20px 0;
+
+	span {
+		float: left;
+		display: block;
+		width: 18px;
+		height: 18px;
+		margin-right: 5px;
+		color: #ce2c52;
+		font-size: 15px;
+	}
+
+	span.empty {
+		color: #ababab;
+	}
+}
+
+.product-desc {
+	color: #282828;
+	font-size: 12px;
+	margin: 0 0 10px;
+
+	div {
+		display: none;
+	}
+}
+
+.modal-title {
+	font-size: 24px;
+	font-family: $title-font;
+	color: $label-color;
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.tablet-modal {
+
+	.modal-content {
+		width: 90%;
+	}
+
+	.product-info {
+		padding-right: 10px;
+	}
+
+	.product-desc {
+		clear: both;
+
+		div {
+			display: block;
+			font: $text-bold 20px $body-font;
+			padding-top: 15px;
+
+		}
+
+		p {
+			margin-top: 5px
+		}
+	}
+
+	.socials {
+		top: 55px;
+
+		span {
+			margin-left: 0;
+		}
+	}
+
+	.item-number {
+		margin-top: 0;
+	}
+
+	.stars {
+		margin-top: 0;
+	}
+
+	.price {
+		font-size: 38px;
+
+		span {
+			&:last-child {
+				display: block;
+			}
+		}
+	}
+
+	.modal-title {
+		margin-bottom: 20px;
+	}
+
+	.plus-shape {
+		display: none;
+	}
+
+	.sizes {
+		span {
+			margin: 0 19px 10px 0;
+
+			&:last-child {
+				margin-right: 0
+			}
+		}
+	}
+
+}
+
+.phone-modal {
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 175px;
+
+	img {
+		float: none;
+		display: block;
+		margin: 40px auto 0;
+	}
+
+	.modal-content {
+		padding-top: 50px;
+		padding-bottom: 50px;
+	}
+
+	.modal-title {
+		margin-bottom: 10px;
+	}
+
+	.item-number {
+		float: left;
+		margin-top: 0;
+	}
+
+	.stars {
+		float: right;
+		margin: 0;
+	}
+
+	.product-info {
+		text-align: center;
+
+		.product-desc {
+			text-align: left;
+			margin: 10px 0 10px;
+		}
+
+		.primary-button {
+			width: 280px;
+		}
+
+		.sizes {
+			margin: 20px 0 30px;
+
+			span {
+				margin: 0 3%;
+			}
+		}
+	}
+
+	.socials {
+		position: relative;
+		top: initial;
+		left: initial;
+		width: 270px;
+		margin: 15px auto 30px;
+
+		span {
+			margin: 0 5px;
+			float: left;
+		}
+
+	}
+
+	.modal-close {
+		border: 0;
+		
+		&:before {
+			width: 4px;
+			height: 30px;
+		    top: 5px;
+    		left: 18px;
+		}
+
+		&:after {
+			height: 4px;
+			width: 30px;
+			top: 18px;
+    		left: 5px;
+		}
+	}
+
+	.plus-shape {
+		display: none;
+	}
+
+}
+
+.socials {
+	width: 40px;
+	height: 30px;
+	position: absolute;
+	top: 32px;
+	left: 30px;	
+	overflow: hidden;
+	padding-top: 30px;
+	cursor: pointer;
+	-webkit-transition: overflow 200ms ease-in-out;
+	transition: overflow 200ms ease-in-out;
+
+	.socials-inner {
+		overflow: hidden;
+	}
+
+	&:hover {
+		overflow: visible;
+
+		span {
+			margin: 5px 0 5px 0px;
+		}
+
+		.plus-shape {
+			-ms-transform: rotate(-45deg);
+		    -webkit-transform: rotate(-45deg);
+		    transform: rotate(-45deg);
+		}
+	}
+
+	span {
+		@include border-radius(20px);
+		border: 2px solid #2c87ce;
+		display: block;
+		width: 40px;
+		height: 40px;
+		text-align: center;
+		margin: 5px 0 5px -100px;
+		position: relative;
+
+		&:before {
+			color: #2c87ce;
+			font-size: 17px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			@include translate(-50%, -50%);
+			transition: all 200ms ease-in-out;
+			
+		}
+
+		&:hover {
+			border-color: darken(#2c87ce, 10%);
+		}
+	}
+
+			
+	$list: facebook twitter pinterest youtube instagram;
+
+	@each $icon in $list {
+		$i: index($list, $icon);
+		.#{$icon} {
+		    -webkit-transition: margin 200ms ease-in-out #{($i+1)*50}ms;
+			transition: margin 200ms ease-in-out #{($i+1)*50}ms;
+		
+		}
+	}
+
+	.plus-shape {
+		background: #2c87ce;
+		width: 5px;
+		height: 25px;
+		position: absolute;
+		top: 0;
+		left: 15px;
+		-webkit-transition: all 200ms ease-in-out;
+		transition: all 200ms ease-in-out;
+
+		&:after {
+			background: #2c87ce;
+		    content: "";
+		    height: 5px;
+		    left: -10px;
+		    position: absolute;
+		    top: 10px;
+		    width: 25px;
+		}
+	}
+}
+
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}

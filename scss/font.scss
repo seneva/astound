@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+[data-icon]:before {
+  font-family: "socials" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "socials" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-facebook-logo:before {
+  content: "\61";
+}
+.icon-instagram-social-network-logo-of-photo-camera:before {
+  content: "\62";
+}
+.icon-pinterest:before {
+  content: "\63";
+}
+.icon-star:before {
+  content: "\64";
+}
+.icon-twitter-logo-silhouette:before {
+  content: "\65";
+}
+.icon-youtube-logo:before {
+  content: "\66";
+}
