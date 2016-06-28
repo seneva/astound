@@ -454,6 +454,7 @@ body {
 
 	.socials {
 		top: 55px;
+		height: auto;
 
 		span {
 			margin-left: 0;
@@ -555,6 +556,13 @@ body {
 		left: initial;
 		width: 270px;
 		margin: 15px auto 30px;
+		height: auto;
+
+		&:hover {
+			span {
+				margin: 0 5px;
+			}
+		}
 
 		span {
 			margin: 0 5px;

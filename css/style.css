@@ -561,7 +561,8 @@ body {
   .tablet-modal .product-desc p {
     margin-top: 5px; }
 .tablet-modal .socials {
-  top: 55px; }
+  top: 55px;
+  height: auto; }
   .tablet-modal .socials span {
     margin-left: 0; }
 .tablet-modal .item-number {
@@ -616,7 +617,10 @@ body {
     top: initial;
     left: initial;
     width: 270px;
-    margin: 15px auto 30px; }
+    margin: 15px auto 30px;
+    height: auto; }
+    .phone-modal .socials:hover span {
+      margin: 0 5px; }
     .phone-modal .socials span {
       margin: 0 5px;
       float: left; }
